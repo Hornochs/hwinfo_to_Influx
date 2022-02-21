@@ -6,7 +6,7 @@ import requests
 from datetime import datetime
 from influxdb import InfluxDBClient
 
-CLIENT = InfluxDBClient("grafana.i.3fu.de", "8086", "user", "pass", "db")
+CLIENT = InfluxDBClient("grafana.i.3fu.de", "8086", "grafana", "jj4bseEL66s4wSFE", "firewall")
 MEASUREMENT = "arbeitspc"
 REMOTE_EXE = "C:\\Users\\Gamienator\\AppData\\Roaming\\RemoteSensorMonitoring\\Remote Sensor Monitor.exe"
 
@@ -60,7 +60,7 @@ def sendToInflux():
     summarized = {}
     for d in data:
         name = "{}__{}".format(d['SensorClass'], d['SensorName']).replace(" ", "_")
-        summarized[name]=d['SensorValue'].replace(",", ".")
+        summarized[name]=float(d['SensorValue'].replace(",", "."))
 
     json_body=[
         {
