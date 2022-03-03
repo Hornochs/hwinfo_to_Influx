@@ -83,7 +83,10 @@ def main():
        #print('Process Exists | PID and other details are')
        for elem in listOfProcessIds:
            processID = elem['pid']
-           sendToInflux()
+           try:
+               sendToInflux()
+           except Exception:
+               pass
            #print((processID ,processName,processCreationTime ))
            process = psutil.Process(processID)
            process.terminate()
